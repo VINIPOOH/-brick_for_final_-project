@@ -1,4 +1,4 @@
-package ua.testing.internationalJPA.entity;
+package ua.testing.authorization.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

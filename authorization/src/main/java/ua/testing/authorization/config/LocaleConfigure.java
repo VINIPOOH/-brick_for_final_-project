@@ -1,4 +1,4 @@
-package ua.testing.internationalJPA.config;
+package ua.testing.authorization.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

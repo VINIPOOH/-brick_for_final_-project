@@ -1,4 +1,4 @@
-package ua.testing.internationalJPA.form;
+package ua.testing.authorization.form;
 
 public class PersonForm {
 

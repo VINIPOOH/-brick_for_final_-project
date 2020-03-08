@@ -1,4 +1,4 @@
-package ua.testing.internationalJPA.controller;
+package ua.testing.authorization.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.testing.internationalJPA.form.PersonForm;
-import ua.testing.internationalJPA.entity.Person;
-import ua.testing.internationalJPA.service.UserService;
+import ua.testing.authorization.form.PersonForm;
+import ua.testing.authorization.entity.Person;
+import ua.testing.authorization.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
