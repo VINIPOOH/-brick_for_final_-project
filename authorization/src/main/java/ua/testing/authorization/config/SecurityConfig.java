@@ -23,8 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public SecurityConfig(AuthorizationService userAuthenticationService) {
         this.userAuthenticationService = userAuthenticationService;
     }
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 

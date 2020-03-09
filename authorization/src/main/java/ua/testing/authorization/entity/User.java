@@ -1,11 +1,15 @@
 package ua.testing.authorization.entity;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -13,20 +17,35 @@ import javax.persistence.*;
 @Entity
 @Table( name="user",
         uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
-public class User {
+public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "email", nullable = false)
-    private String email;
-    @Column(name = "phone", nullable = false)
-    private String phone;
-    @Column(name = "name_ru", nullable = false)
-    private String nameRu;
-    @Column(name = "name_en", nullable = false)
-    private String nameEn;
+
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private RoleType role;
+    private RoleType roleType;
+    private String password;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+    private boolean enabled;
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(roleType);
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+
+
+
 }

@@ -26,7 +26,7 @@ public class AuthorizationService implements UserDetailsService {
     public User loadUserByUsername(@NonNull String email) throws UsernameNotFoundException {
 
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("There is no user with login: " + login));
+                .orElseThrow(() -> new UsernameNotFoundException("There is no user with login: " + email));
 
         return user;
     }
