@@ -26,8 +26,12 @@ public class AuthenticationController {
         this.userService = userService;
     }
 
-    @Autowired
 
+    @RequestMapping(value = {"/login/error"}, method = RequestMethod.GET)
+    public ModelAndView loginError() {
+        ModelAndView view = new ModelAndView("login");
+        return view;
+    }
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ModelAndView login() {
