@@ -27,7 +27,7 @@
         <td><span  th:text="${user.password}"></span> </td>
     </tr>
     </tbody>
-    <a th:href="@{/admin/users}" th:text="#{button.to.userpage}"></a>
+    <a th:if="${user.roleType.name()=='ROLE_ADMIN'}" th:href="@{/admin/users}" th:text="#{button.to.userpage}"></a>
 </table>
 </body>
 </html>
