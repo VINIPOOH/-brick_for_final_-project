@@ -6,7 +6,7 @@
     <title th:text="#{title.registrationpage}"></title>
 </head>
 <body>
-<body>
+<div th:insert="~{layout/international_swicher.html::international}"></div>
 <form method="post" th:action="@{/registration}">
     <input th:name="${_csrf.headerName}" th:value="${_csrf.token}" type="hidden">
     <div class="form-group">
@@ -20,6 +20,5 @@
     </div>
     <button type="submit" th:text="#{lofinpage.button.login}"></button>
 </form>
-</body>
 </body>
 </html>
