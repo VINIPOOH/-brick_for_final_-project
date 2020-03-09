@@ -11,19 +11,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import ua.testing.authorization.entity.RoleType;
-import ua.testing.authorization.service.AuthorizationService;
+import ua.testing.authorization.service.AuthenticationService;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final AuthorizationService userAuthenticationService;
+    private final AuthenticationService userAuthenticationService;
 
     @Autowired
-    public SecurityConfig(AuthorizationService userAuthenticationService) {
+    public SecurityConfig(AuthenticationService userAuthenticationService) {
         this.userAuthenticationService = userAuthenticationService;
     }
     @Override

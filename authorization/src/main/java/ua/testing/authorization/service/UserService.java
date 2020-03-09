@@ -26,4 +26,7 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .orElseThrow(()->new UsernameNotFoundException("There is no user with login: " + email));
     }
+    public void addNewUserToDB(User user){
+        userRepository.save(user);
+    }
 }
