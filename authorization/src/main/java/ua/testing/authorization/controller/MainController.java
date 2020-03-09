@@ -2,6 +2,8 @@ package ua.testing.authorization.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.testing.authorization.entity.User;
 import ua.testing.authorization.service.UserService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -27,10 +30,23 @@ public class MainController {
         ModelAndView view = new ModelAndView("index");
         return view;
     }
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+    public ModelAndView login() {
+        ModelAndView view = new ModelAndView("login");
+        return view;
+    }
+    @RequestMapping(value = {"/user/user_profile"}, method = RequestMethod.GET)
+    public ModelAndView userProfile(HttpSession httpSession, @AuthenticationPrincipal UserDetails userDetails) {
+        User user=userService.findByEmail(userDetails.getUsername());
+        httpSession.setAttribute(SessionConstants.SESSION_USER.name(), user );
+        ModelAndView view = new ModelAndView("user/user_profile");
+        view.addObject(user);
+        return view;
+    }
 
 
     @RequestMapping(value = {"/admin/users"}, method = RequestMethod.GET)
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView users() {
         ModelAndView view = new ModelAndView("admin/users");
         List<User> usersList = userService.getAllUsers();
@@ -38,13 +54,7 @@ public class MainController {
         return view;
     }
 
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    public String index(Model model) {
 
-        model.addAttribute("message", true);
-
-        return "index";
-    }
 
 
 }

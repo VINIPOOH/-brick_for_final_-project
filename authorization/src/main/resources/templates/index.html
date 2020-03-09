@@ -2,13 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>${IHomePageConstant.PAGE_HEADER}</title>
+    <title th:text="#{homepage.title}"></title>
 </head>
 <body>
 <a href="?lang=en" th:text="#{button.en.text}"></a>
 <a href="?lang=ru" th:text="#{button.ru.text}"></a>
 <h1 th:text="#{home.page.header}"></h1>
-<a th:href="@{/users}" th:text="#{button.to.userpage}"></a>
 
 </body>
 </html>

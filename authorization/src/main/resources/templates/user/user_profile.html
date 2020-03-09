@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{userlist.page.header}"></title>
+    <title th:text="#{userprofilepage.title}"></title>
 </head>
 <body>
 <table class="table" style="
@@ -14,21 +15,19 @@
         ">
     <thead>
     <tr>
-        <th th:text="#{userlist.page.password.colum.name}"></th>
         <th th:text="#{userlist.page.email.colum.name}"></th>
         <th th:text="#{userlist.page.role.colum.name}"></th>
+        <th th:text="#{userlist.page.password.colum.name}"></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user: ${userList}">
-        <td th:if="${#locale.getISO3Language() == 'eng'}" ><span  th:text="${user.password}"></span> </td>
+    <tr>
         <td><span th:text="${user.email}">  </span></td>
         <td><span th:text="${user.roleType}"> </span></td>
+        <td><span  th:text="${user.password}"></span> </td>
     </tr>
     </tbody>
-</table>
-<a th:href="@{/home}" th:text="#{button.to.homepage}"></a>
-
+    <a th:href="@{/admin/users}" th:text="#{button.to.userpage}"></a>
 </table>
 </body>
 </html>
