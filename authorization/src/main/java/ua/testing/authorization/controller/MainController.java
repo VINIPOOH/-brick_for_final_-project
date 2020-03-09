@@ -1,17 +1,15 @@
 package ua.testing.authorization.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.testing.authorization.form.PersonForm;
-import ua.testing.authorization.entity.Person;
+import ua.testing.authorization.entity.User;
 import ua.testing.authorization.service.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,40 +22,23 @@ public class MainController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = { "/home" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
     public ModelAndView home() {
-        ModelAndView view=new ModelAndView("index");
+        ModelAndView view = new ModelAndView("index");
         return view;
     }
 
-    @RequestMapping(value = { "/users" }, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/admin/users"}, method = RequestMethod.GET)
+    //@PreAuthorize("hasRole('ADMIN')")
     public ModelAndView users() {
-        ModelAndView view=new ModelAndView("users");
-        List<Person> personList=userService.getAllUsers();
-        view.addObject(personList);
+        ModelAndView view = new ModelAndView("admin/users");
+        List<User> usersList = userService.getAllUsers();
+        view.addObject(usersList);
         return view;
     }
 
-
-
-
-
-
-
-
-    private static List<Person> persons = new ArrayList<Person>();
-
-
-
-    // Инъетировать (inject) из application.properties.
-//    @Value("${welcome.message}")
-//    private String message;
-//
-//    @Value("${error.message}")
-//    private String errorMessage;
-
-
-    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
 
         model.addAttribute("message", true);
@@ -65,39 +46,5 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = { "/personList" }, method = RequestMethod.GET)
-    public String personList(Model model) {
-        model.addAttribute("persons", persons);
-
-        return "personList";
-    }
-
-    @RequestMapping(value = { "/addPerson" }, method = RequestMethod.GET)
-    public String addPersonForm(Model model) {
-
-        PersonForm personForm = new PersonForm();
-        model.addAttribute("personForm", personForm);
-
-        return "addPerson";
-    }
-
-    @RequestMapping(value = { "/addPerson" }, method = RequestMethod.POST)
-    public String addPersonSave(Model model, //
-                                @ModelAttribute("personForm") PersonForm personForm) {
-
-        String firstName = personForm.getFirstName();
-        String lastName = personForm.getLastName();
-
-        if (firstName != null && firstName.length() > 0 //
-                && lastName != null && lastName.length() > 0) {
-
-
-
-            return "redirect:/personList";
-        }
-        String error = "First Name & Last Name is required!";
-        model.addAttribute("errorMessage", error);
-        return "addPerson";
-    }
 
 }

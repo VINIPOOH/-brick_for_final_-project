@@ -2,22 +2,22 @@ package ua.testing.authorization.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.testing.authorization.entity.Person;
-import ua.testing.authorization.repository.PersonRepository;
+import ua.testing.authorization.entity.User;
+import ua.testing.authorization.repository.UserRepository;
 
 import java.util.List;
 
 @Service
 public class UserService {
 
-    PersonRepository personRepository;
+    UserRepository userRepository;
 
     @Autowired
-    public void setPersonRepository(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public List<Person> getAllUsers(){
-        return personRepository.findAll();
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

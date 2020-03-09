@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -15,15 +14,14 @@ import java.util.List;
 @Builder
 @ToString
 @Entity
-@Table( name="user",
-        uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
+@Table(name = "user",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
@@ -44,8 +42,6 @@ public class User implements UserDetails {
     public String getUsername() {
         return email;
     }
-
-
 
 
 }

@@ -20,11 +20,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="person: ${personList}">
-        <td th:if="${#locale.getISO3Language() == 'eng'}" ><span  th:text="${person.nameEn}"></span> </td>
-        <td th:if="${#locale.getISO3Language() == 'rus'}" ><span  th:text="${person.nameRu}"></span> </td>
-        <td><span th:text="${person.email}">  </span></td>
-        <td><span th:text="${person.phone}"> </span></td>
+    <tr th:each="user: ${userList}">
+        <td th:if="${#locale.getISO3Language() == 'eng'}" ><span  th:text="${user.password}"></span> </td>
+        <td><span th:text="${user.email}">  </span></td>
+        <td><span th:text="${user.roleType}"> </span></td>
     </tr>
     </tbody>
 </table>
