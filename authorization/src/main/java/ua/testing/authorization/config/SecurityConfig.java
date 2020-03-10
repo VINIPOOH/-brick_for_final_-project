@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public SecurityConfig(AuthenticationService userAuthenticationService) {
         this.userAuthenticationService = userAuthenticationService;
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -39,9 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().defaultSuccessUrl("/user/user_profile", true).loginPage("/login")
                 .and()
-                .exceptionHandling().accessDeniedPage("/login/error");;
+                .exceptionHandling().accessDeniedPage("/login/error");
 
     }
+
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()

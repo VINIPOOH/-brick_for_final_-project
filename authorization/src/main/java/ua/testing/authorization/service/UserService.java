@@ -7,12 +7,11 @@ import ua.testing.authorization.entity.User;
 import ua.testing.authorization.repository.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -22,11 +21,13 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
-    public User findByEmail(String email){
+
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(()->new UsernameNotFoundException("There is no user with login: " + email));
+                .orElseThrow(() -> new UsernameNotFoundException("There is no user with login: " + email));
     }
-    public void addNewUserToDB(User user){
+
+    public void addNewUserToDB(User user) {
         userRepository.save(user);
     }
 }

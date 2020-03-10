@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    UserService userService;
+    private UserService userService;
 
     @Autowired
     public MainController(UserService userService) {
@@ -26,16 +26,14 @@ public class MainController {
 
     @RequestMapping(value = {"/home"}, method = RequestMethod.GET)
     public ModelAndView home() {
-        ModelAndView view = new ModelAndView("index");
-        return view;
+        return new ModelAndView("index");
     }
-
 
 
     @RequestMapping(value = {"/user/user_profile"}, method = RequestMethod.GET)
     public ModelAndView userProfile(HttpSession httpSession, @AuthenticationPrincipal UserDetails userDetails) {
-        User user=userService.findByEmail(userDetails.getUsername());
-        httpSession.setAttribute(SessionConstants.SESSION_USER.name(), user );
+        User user = userService.findByEmail(userDetails.getUsername());
+        httpSession.setAttribute(SessionConstants.SESSION_USER.name(), user);
         ModelAndView view = new ModelAndView("user/user_profile");
         view.addObject(user);
         return view;
@@ -50,8 +48,6 @@ public class MainController {
         view.addObject(usersList);
         return view;
     }
-
-
 
 
 }

@@ -29,7 +29,8 @@ public class AuthenticationService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("There is no user with login: " + email));
 
     }
-    public User convertRegistrationDotToSimpleUserReadyForAddToDB(RegistrationInfoDto registration){
+
+    public User convertRegistrationDotToSimpleUserReadyForAddToDB(RegistrationInfoDto registration) {
         return User.builder()
                 .accountNonExpired(true)
                 .credentialsNonExpired(true)
