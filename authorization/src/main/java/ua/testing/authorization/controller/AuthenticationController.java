@@ -7,10 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import ua.testing.authorization.controller.validation.RegistrationDtoValidator;
 import ua.testing.authorization.controller.validation.RegularValidator;
+import ua.testing.authorization.controller.validation.Validator;
 import ua.testing.authorization.dto.RegistrationInfoDto;
 import ua.testing.authorization.service.AuthenticationService;
 import ua.testing.authorization.service.UserService;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 @Controller
 public class AuthenticationController {
@@ -18,14 +23,17 @@ public class AuthenticationController {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationService authenticationService;
     private final UserService userService;
+    private final Validator validator = new RegistrationDtoValidator(ResourceBundle.getBundle(
+            "regular_templates"
+            , new Locale("en")));;
 
     @Autowired
     public AuthenticationController(PasswordEncoder passwordEncoder, AuthenticationService authenticationService, UserService userService) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationService = authenticationService;
         this.userService = userService;
+        //this.validator = validator;
     }
-
 
     @RequestMapping(value = {"/login/error"}, method = RequestMethod.GET)
     public ModelAndView loginError() {
@@ -45,8 +53,8 @@ public class AuthenticationController {
     @RequestMapping(value = {"/registration"}, method = RequestMethod.POST)
     public ModelAndView registrationTry(RegistrationInfoDto registrationInfoDto) {
         RegularValidator regularValidator = new RegularValidator(LocaleContextHolder.getLocale());
-        if (regularValidator.isEmailValid(registrationInfoDto.getUsername())
-                && registrationInfoDto.getPassword().equals(registrationInfoDto.getPasswordRepeat())) {
+        if (validator.isValid(registrationInfoDto)) {
+            System.out.println(1);
             registrationInfoDto.setPassword
                     (passwordEncoder.encode(registrationInfoDto.getPassword()));
             userService.addNewUserToDB(

@@ -22,6 +22,7 @@ public class RegularValidator implements RegexConstantLinks {
     }
 
     public boolean isEmailValid(String email) {
+        System.out.println(email.matches(EMAIL_TEMPLATE));
         return email.matches(EMAIL_TEMPLATE);
     }
 }
