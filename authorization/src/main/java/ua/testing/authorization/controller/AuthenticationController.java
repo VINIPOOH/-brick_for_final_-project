@@ -1,16 +1,19 @@
 package ua.testing.authorization.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ua.testing.authorization.controller.validation.RegularValidator;
 import ua.testing.authorization.dto.RegistrationInfoDto;
 import ua.testing.authorization.service.AuthenticationService;
 import ua.testing.authorization.service.UserService;
+
+import javax.validation.Valid;
 
 @Controller
 public class AuthenticationController {
@@ -18,6 +21,7 @@ public class AuthenticationController {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationService authenticationService;
     private final UserService userService;
+
 
     @Autowired
     public AuthenticationController(PasswordEncoder passwordEncoder, AuthenticationService authenticationService, UserService userService) {
@@ -38,15 +42,18 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = {"/registration"}, method = RequestMethod.GET)
-    public ModelAndView registrationTry() {
+    public ModelAndView registrationTry(Model model) {
+        model.addAttribute("registrationInfoDto", new RegistrationInfoDto());
         return new ModelAndView("registration");
     }
 
     @RequestMapping(value = {"/registration"}, method = RequestMethod.POST)
-    public ModelAndView registrationTry(RegistrationInfoDto registrationInfoDto) {
-        RegularValidator regularValidator = new RegularValidator(LocaleContextHolder.getLocale());
-        if (regularValidator.isEmailValid(registrationInfoDto.getUsername())
-                && registrationInfoDto.getPassword().equals(registrationInfoDto.getPasswordRepeat())) {
+    public ModelAndView registrationTry(@Valid @ModelAttribute RegistrationInfoDto registrationInfoDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            //вернусть страницу регистрации
+            return new ModelAndView("registration");
+        }
+        if (registrationInfoDto.getPassword().equals(registrationInfoDto.getPasswordRepeat())) {
             registrationInfoDto.setPassword
                     (passwordEncoder.encode(registrationInfoDto.getPassword()));
             userService.addNewUserToDB(
