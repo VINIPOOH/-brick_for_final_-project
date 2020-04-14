@@ -9,11 +9,6 @@ public class RegistrationDtoValidator implements Validator<RegistrationInfoDto> 
 
     @Override
     public boolean validate(RegistrationInfoDto dto) {
-        System.out.println("validation");
-        //System.out.println("loginvalid"+stringParamValidate(dto.getUsername(), LOGIN_REGEX));
-        System.out.println("paswordvalid" + dto.getPassword().equals(dto.getPasswordRepeat()));
-        System.out.println(stringParamValidate(dto.getUsername(), LOGIN_REGEX)
-                || dto.getPassword().equals(dto.getPasswordRepeat()));
         return stringParamValidate(dto.getUsername(), LOGIN_REGEX)
                 || dto.getPassword().equals(dto.getPasswordRepeat());
     }

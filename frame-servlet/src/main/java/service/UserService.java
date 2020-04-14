@@ -2,6 +2,7 @@ package service;
 
 
 import db.dao.UserDao;
+import dto.LoginInfoDto;
 import dto.RegistrationInfoDto;
 import entity.RoleType;
 import entity.User;
@@ -11,6 +12,7 @@ import exeptions.UsernameNotFoundException;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 public class UserService {
 
@@ -24,6 +26,19 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userDao.findAll();
+    }
+
+    public Optional<User> loginUser(LoginInfoDto loginInfoDto) throws NoSuchUserException {
+        System.out.println("pre find");
+        User user = userDao.findByEmail(loginInfoDto.getUsername()).orElseThrow(NoSuchUserException::new);
+        System.out.println("post find");
+        if (user.isAccountNonExpired()&&user.isAccountNonLocked()&&user.isCredentialsNonExpired()
+                &&user.isEnabled()&&user.getPassword().equals(passwordEncoderService.encode(loginInfoDto.getPassword()))){
+            System.out.println("LOGIN Suxes");
+            return Optional.of(user);
+        }
+
+        return Optional.empty();
     }
 
     public User findByEmail(String email) {

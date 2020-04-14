@@ -21,6 +21,12 @@ public class UserMapper implements Mapper<User> {
 
     @Override
     public Optional<User> mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-        return Optional.empty();
+        return Optional.of(User.builder().email(resultSet.getString("email"))
+                .password(resultSet.getString("password"))
+                .accountNonExpired(resultSet.getBoolean("account_non_expired"))
+                .accountNonLocked(resultSet.getBoolean("account_non_locked"))
+                .credentialsNonExpired(resultSet.getBoolean("credentials_non_expired"))
+                .enabled(resultSet.getBoolean("enabled"))
+                .build());
     }
 }

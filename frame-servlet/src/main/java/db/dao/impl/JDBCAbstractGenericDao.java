@@ -13,20 +13,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public abstract class JDBCAbstractGenericDao<E> implements GenericDao<E, Long> {
 
-    private final Mapper<E> mapper;
+    protected final Mapper<E> mapper;
     private final String saveQuery;
     private final String findByIdQuery;
     private final String findAllQuery;
     private final String updateQuery;
     private final String deleteQuery;
-    private DbConnectionPoolHolder connector;
+    protected final ResourceBundle resourceBundleRequests;
+    protected DbConnectionPoolHolder connector;
 
 
     protected JDBCAbstractGenericDao(DbConnectionPoolHolder connector, Mapper<E> mapper, String saveQuery, String findByIdQuery, String findAllQuery,
-                                     String updateQuery, String deleteQuery) {
+                                     String updateQuery, String deleteQuery, ResourceBundle resourceBundleRequests) {
         this.connector = connector;
         this.mapper = mapper;
         this.saveQuery = saveQuery;
@@ -34,6 +36,7 @@ public abstract class JDBCAbstractGenericDao<E> implements GenericDao<E, Long> {
         this.findAllQuery = findAllQuery;
         this.updateQuery = updateQuery;
         this.deleteQuery = deleteQuery;
+        this.resourceBundleRequests = resourceBundleRequests;
     }
 
     @Override

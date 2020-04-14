@@ -31,7 +31,7 @@
                             <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat">
                         </div>
                         <button class="btn btn-success" type="submit"><fmt:message key="registrationpage.button.registration"/></button>
-                        <a class="btn"  align="left" href="${pageContext.request.contextPath}/login}"><fmt:message key="registrationpage.button.gotoLogin"/></a>
+                        <a class="btn"  align="left" href="${pageContext.request.contextPath}/login"><fmt:message key="registrationpage.button.gotoLogin"/></a>
                     </form>
                 </div>
             </div>

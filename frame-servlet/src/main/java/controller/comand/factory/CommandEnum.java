@@ -4,10 +4,10 @@ import controller.comand.action.ActionCommand;
 import controller.comand.action.impl.LogOut;
 import controller.comand.action.impl.Login;
 import controller.comand.action.impl.Registration;
-import db.conection.impl.DbConnectorPoolHolderBasicDataSource;
 import db.dao.impl.JDBCDaoFactory;
-import db.dao.impl.JDBCUserDao;
+import dto.maper.LoginRequestDtoMapper;
 import dto.maper.RegistrationRequestDtoMapper;
+import dto.validation.LoginDtoValidator;
 import dto.validation.RegistrationDtoValidator;
 import service.PasswordEncoderService;
 import service.UserService;
@@ -15,7 +15,7 @@ import service.UserService;
 public enum CommandEnum {
     LOGIN {
         {
-            this.command = new Login();
+            this.command = new Login(new LoginDtoValidator(), new LoginRequestDtoMapper(), new UserService(new PasswordEncoderService(), JDBCDaoFactory.getUserDao()));
         }
     },
     LOGOUT {
