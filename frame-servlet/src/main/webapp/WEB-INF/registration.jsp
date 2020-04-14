@@ -1,17 +1,11 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page isELIgnored="false" %>
-
-<fmt:setBundle basename="page"/>
+<%@ include file="layout/metadata-standart.jsp" %>
 <html lang="${param.lang}">
-
 <head>
+    <%@ include file="layout/bootstrap.jsp" %>
     <title ><fmt:message key="title.registrationpage"/></title>
-    <%--    <div th:include="~{layout/header.html::head_base_data}"></div>--%>
 </head>
 <body>
-<div th:include="~{layout/header.html::header}"></div>
+<%@ include file="layout/header.jsp" %>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -37,7 +31,7 @@
                             <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat">
                         </div>
                         <button class="btn btn-success" type="submit"><fmt:message key="registrationpage.button.registration"/></button>
-                        <a class="btn"  align="left" th:href="@{/login}"><fmt:message key="registrationpage.button.gotoLogin"/></a>
+                        <a class="btn"  align="left" href="${pageContext.request.contextPath}/login}"><fmt:message key="registrationpage.button.gotoLogin"/></a>
                     </form>
                 </div>
             </div>

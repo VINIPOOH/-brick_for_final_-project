@@ -1,11 +1,11 @@
 <%--<!DOCTYPE html>--%>
 <%--<html xmlns:th="http://www.thymeleaf.org">--%>
 <%--<head>--%>
-<%--    <div th:include="~{layout/header.html::head_base_data}"></div>--%>
+<%--    <div th:include="~{layout/header.jsp::head_base_data}"></div>--%>
 <%--    <title th:text="#{homepage.title}"></title>--%>
 <%--</head>--%>
 <%--<body>--%>
-<%--<div th:include="~{layout/header.html::header}"></div>--%>
+<%--<div th:include="~{layout/header.jsp::header}"></div>--%>
 <%--<div class="container">--%>
 <%--    <div class="row">--%>
 <%--        <div class="col-md-6">--%>
