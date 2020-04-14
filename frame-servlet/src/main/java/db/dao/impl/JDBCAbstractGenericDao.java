@@ -42,9 +42,9 @@ public abstract class JDBCAbstractGenericDao<E> implements GenericDao<E, Long> {
              PreparedStatement preparedStatement = connection.prepareStatement(saveQuery)) {
 
             mapper.insertStatementMapper(entity, preparedStatement);
-            if (preparedStatement.executeUpdate() != 0){
+            if (preparedStatement.executeUpdate() != 0) {
                 return entity;
-            }else {
+            } else {
                 throw new SQLException();
             }
         }

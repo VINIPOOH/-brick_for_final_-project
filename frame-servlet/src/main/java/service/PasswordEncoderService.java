@@ -2,8 +2,6 @@ package service;
 
 
 import exeptions.PasswordEncodeException;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

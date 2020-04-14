@@ -8,13 +8,11 @@ import entity.User;
 import java.util.List;
 import java.util.Optional;
 
-import static db.dao.UserDaoConstants.SAVE_QUERY;
-
 
 public class JDBCUserDao extends JDBCAbstractGenericDao<User> implements UserDao {
 
     public JDBCUserDao(DbConnectionPoolHolder connector, Mapper<User> mapper, String saveQuery, String findByIdQuery, String findAllQuery, String updateQuery, String deleteQuery) {
-        super(connector, mapper, SAVE_QUERY, findByIdQuery, findAllQuery, updateQuery, deleteQuery);
+        super(connector, mapper, saveQuery, findByIdQuery, findAllQuery, updateQuery, deleteQuery);
     }
 
     @Override

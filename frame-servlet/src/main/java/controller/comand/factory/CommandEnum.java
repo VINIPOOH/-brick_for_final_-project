@@ -5,6 +5,7 @@ import controller.comand.action.impl.LogOut;
 import controller.comand.action.impl.Login;
 import controller.comand.action.impl.Registration;
 import db.conection.impl.DbConnectorPoolHolderBasicDataSource;
+import db.dao.impl.JDBCDaoFactory;
 import db.dao.impl.JDBCUserDao;
 import dto.maper.RegistrationRequestDtoMapper;
 import dto.validation.RegistrationDtoValidator;
@@ -25,8 +26,7 @@ public enum CommandEnum {
     REGISTRATION {
         {
             this.command = new Registration(new RegistrationRequestDtoMapper(),
-                    new RegistrationDtoValidator(), new UserService(new PasswordEncoderService(), new JDBCUserDao
-                    (new DbConnectorPoolHolderBasicDataSource(), null,null,null,null,null,null)));
+                    new RegistrationDtoValidator(), new UserService(new PasswordEncoderService(), JDBCDaoFactory.getUserDao()));
         }
     };
     ActionCommand command;

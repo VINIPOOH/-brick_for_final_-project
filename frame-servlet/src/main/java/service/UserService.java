@@ -34,7 +34,9 @@ public class UserService {
     public void addNewUserToDB(RegistrationInfoDto registrationInfoDto) throws OccupiedLoginException {
         User user = getMapper().mapToEntity(registrationInfoDto);
         try {
+            System.out.println("try save");
             userDao.save(user);
+            System.out.println("suxes save");
         } catch (SQLException e) {
             throw new OccupiedLoginException();
         }

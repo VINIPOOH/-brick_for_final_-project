@@ -9,9 +9,9 @@ public class RegistrationRequestDtoMapper implements RequestDtoMapper<Registrati
     @Override
     public RegistrationInfoDto mapToDto(HttpServletRequest request) {
         return RegistrationInfoDto.builder()
-                .username("username")
-                .password("password")
-                .passwordRepeat("passwordRepeat")
+                .username(request.getParameter("username"))
+                .password(request.getParameter("password"))
+                .passwordRepeat(request.getParameter("passwordRepeat"))
                 .build();
     }
 }

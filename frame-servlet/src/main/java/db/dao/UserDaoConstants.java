@@ -1,5 +1,7 @@
 package db.dao;
 
 public interface UserDaoConstants {
-    String SAVE_QUERY = "INSERT INTO user(email, password) VALUES (?,?)";
+    String PATH_TO_PROPERTY_FILE = "db-request";
+    String USER_SAVE_QUERY = "user.save";
+
 }
