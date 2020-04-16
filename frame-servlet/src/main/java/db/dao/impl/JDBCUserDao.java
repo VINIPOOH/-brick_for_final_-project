@@ -25,23 +25,14 @@ public class JDBCUserDao extends JDBCAbstractGenericDao<User> implements UserDao
     @Override
     public Optional<User> findByEmail(String email) {
         try (Connection connection = connector.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(resourceBundleRequests.getString(USER_FIND_BY_EMAIL))) {
-            System.out.println("try start");
+            PreparedStatement preparedStatement = connection.prepareStatement(resourceBundleRequests.getString(USER_FIND_BY_EMAIL))) {
             preparedStatement.setString(1, email);
-            System.out.println("pre resultset");
             ResultSet resultSet = preparedStatement.executeQuery();
-            System.out.println("post result set");
             Optional<User> user = resultSet.next() ? mapper.mapResultSetToEntity(resultSet) : Optional.empty();
-            System.out.println(user.toString());
             return user;
         } catch (SQLException e) {
-            System.out.println(e);
-            System.out.println(e.getStackTrace());
-            System.out.println(e.getSQLState().toString());
-            System.out.println(e.getNextException().getSQLState());
             throw new DBRuntimeException();
         }catch (Exception ex){
-            System.out.println("ex 2");
             throw new DBRuntimeException();
         }
     }

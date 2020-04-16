@@ -4,10 +4,10 @@ import controller.comand.action.MultipleMethodCommand;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Index extends MultipleMethodCommand {
+public class User extends MultipleMethodCommand {
     @Override
     protected String performGet(HttpServletRequest request) {
-        return "WEB-INF/index.jsp";
+        return "WEB-INF/user/u.jsp";
     }
 
     @Override

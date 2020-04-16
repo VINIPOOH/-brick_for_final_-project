@@ -27,20 +27,12 @@ public class Registration extends MultipleMethodCommand {
 
     @Override
     protected String performGet(HttpServletRequest request) {
-        System.out.println("pr"+request.getSession().getAttribute("lang"));
-        Enumeration<String> str=request.getSession().getAttributeNames();
-        System.out.println("start");
-        while (str.hasMoreElements()){
-            System.out.println(str.nextElement());
-        }
-        System.out.println("finish");
         return REGISTRATION_PATH;
     }
 
     @Override
     protected String performPost(HttpServletRequest request) {
         RegistrationInfoDto registrationInfoDto = registrationDtoMapper.mapToDto(request);
-        System.out.println("pr"+request.getSession().getAttribute("lang"));
         if (!registrationInfoDtoValidator.isValid(registrationInfoDto)) {
             request.setAttribute(INPUT_HAS_ERRORS, true);
             return REGISTRATION_PATH;

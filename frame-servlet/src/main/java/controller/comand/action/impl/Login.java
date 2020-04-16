@@ -10,6 +10,8 @@ import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
+
+import static controller.constants.AttributeConstants.SESSION_USER;
 import static controller.constants.PageConstance.*;
 import static controller.constants.DataForPageNamedConstant.*;
 
@@ -38,7 +40,8 @@ public class Login extends MultipleMethodCommand {
             try {
                 Optional<User> user = userService.loginUser(loginInfoDto);
                 if(user.isPresent()){
-                    request.getSession().setAttribute(USER,user.get());
+                    request.getSession().setAttribute(SESSION_USER, user.get());
+                    System.out.println("rediret on in POST "+ REDIRECT_ON_HOME);
                     return REDIRECT_ON_HOME;
                 }
             } catch (NoSuchUserException ignored){}

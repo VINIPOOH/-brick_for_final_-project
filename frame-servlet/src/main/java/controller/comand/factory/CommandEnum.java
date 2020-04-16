@@ -1,9 +1,7 @@
 package controller.comand.factory;
 
 import controller.comand.action.ActionCommand;
-import controller.comand.action.impl.LogOut;
-import controller.comand.action.impl.Login;
-import controller.comand.action.impl.Registration;
+import controller.comand.action.impl.*;
 import db.dao.impl.JDBCDaoFactory;
 import dto.maper.LoginRequestDtoMapper;
 import dto.maper.RegistrationRequestDtoMapper;
@@ -27,6 +25,21 @@ public enum CommandEnum {
         {
             this.command = new Registration(new RegistrationRequestDtoMapper(),
                     new RegistrationDtoValidator(), new UserService(new PasswordEncoderService(), JDBCDaoFactory.getUserDao()));
+        }
+    },
+    ADMIN {
+        {
+            this.command=new Admin();
+        }
+    },
+    USER {
+        {
+            this.command=new User();
+        }
+    },
+    INDEX {
+        {
+            this.command = new Index();
         }
     };
     ActionCommand command;

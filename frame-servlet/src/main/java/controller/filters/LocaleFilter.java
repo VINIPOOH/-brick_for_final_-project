@@ -25,8 +25,6 @@ public class LocaleFilter implements Filter {
         if (request.getParameter(REQUEST_LANG) != null) {
             Config.set(request.getSession(), Config.FMT_LOCALE, new Locale(request.getParameter(REQUEST_LANG)));
         }
-        System.out.println("Locale Filtre");
-
         filterChain.doFilter(servletRequest, servletResponse);
 
     }

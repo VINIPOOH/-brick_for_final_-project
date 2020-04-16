@@ -24,12 +24,11 @@ public class Servlet extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("i in");
 
         String path = request.getRequestURI().replaceFirst(".*/delivery/", "");
-        System.out.println(path + 11);
+        System.out.println("path  "+ path);
         String page = new ActionFactory().defineCommand(path).execute(request);
-        System.out.println(page + 2);
+        System.out.println("page  "+ page);
         if (page.contains("redirect:")) {
             response.sendRedirect(page.replace("redirect:", "/delivery/"));
         } else {

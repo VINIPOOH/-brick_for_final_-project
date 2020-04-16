@@ -29,12 +29,9 @@ public class UserService {
     }
 
     public Optional<User> loginUser(LoginInfoDto loginInfoDto) throws NoSuchUserException {
-        System.out.println("pre find");
         User user = userDao.findByEmail(loginInfoDto.getUsername()).orElseThrow(NoSuchUserException::new);
-        System.out.println("post find");
         if (user.isAccountNonExpired()&&user.isAccountNonLocked()&&user.isCredentialsNonExpired()
                 &&user.isEnabled()&&user.getPassword().equals(passwordEncoderService.encode(loginInfoDto.getPassword()))){
-            System.out.println("LOGIN Suxes");
             return Optional.of(user);
         }
 
@@ -49,9 +46,7 @@ public class UserService {
     public void addNewUserToDB(RegistrationInfoDto registrationInfoDto) throws OccupiedLoginException {
         User user = getMapper().mapToEntity(registrationInfoDto);
         try {
-            System.out.println("try save");
             userDao.save(user);
-            System.out.println("suxes save");
         } catch (SQLException e) {
             throw new OccupiedLoginException();
         }

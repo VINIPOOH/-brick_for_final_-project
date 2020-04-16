@@ -10,16 +10,11 @@ public class ActionFactory {
             return current;
         }
         try {
-            System.out.println(path.toUpperCase() + "path to uperkase");
             CommandEnum currentEnum = CommandEnum.valueOf(path.toUpperCase());
-            System.out.println(path + 4);
             current = currentEnum.getCurrentCommand();
-            System.out.println(path + 5);
         } catch (IllegalArgumentException e) {
-            System.out.println(path + 6);
             return current;
-        } catch (Exception ex) {
-            System.out.println(ex.getStackTrace());
+        } catch (Exception ignored) {
         }
         return current;
     }
