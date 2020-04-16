@@ -2,9 +2,9 @@ package dto.validation;
 
 @FunctionalInterface
 public interface Validator<T> {
-    boolean validate(T dto);
+    boolean isValid(T dto);
 
-    default boolean stringParamValidate(String param, String regex) {
+    default boolean isStringValid(String param, String regex) {
         return param.matches(regex);
     }
 

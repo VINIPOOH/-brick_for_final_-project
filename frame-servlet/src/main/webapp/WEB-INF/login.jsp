@@ -16,7 +16,7 @@
                 </div>
                 <div class="panel-body">
                     <form class="form" method="post" action="${pageContext.request.contextPath}/login">
-                        <c:if test="${error}">
+                        <c:if test="${incorrectLoginOrPassword}">
                         <div class="alert alert-danger" role="alert">
                             <p><fmt:message key="loginpage.form.wrong"/></p>
                         </c:if>
@@ -30,7 +30,6 @@
                         <button class="btn btn-success" type="submit"><fmt:message key="lofinpage.button.login"/></button>
                         <a class="btn"  align="left" href="${pageContext.request.contextPath}/registration"><fmt:message key="lofinpage.button.gotoRegistration"/></a>
                     </form>
-
                 </div>
             </div>
         </div>

@@ -1,4 +1,12 @@
 <%@ include file="layout/metadata-standart.jsp" %>
+
+<%--<c:if test="${not empty lang}">--%>
+<%--    <fmt:setLocale value="${lang}" scope="session"/>--%>
+<%--</c:if>--%>
+<%--<c:if test="${not empty param.lang}">--%>
+<%--    <fmt:setLocale value="${param.lang}" scope="session"/>--%>
+<%--</c:if>--%>
+
 <html lang="${param.lang}">
 <head>
     <%@ include file="layout/bootstrap.jsp" %>
@@ -18,6 +26,12 @@
                         <c:if test="${inputHasErrors}">
                             <div class="alert alert-danger" role="alert">
                                 <p><fmt:message key="registrationpage.form.wrong.input"/></p>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${inputLoginAlreadyTaken}">
+                            <div class="alert alert-danger" role="alert">
+                                <p><fmt:message key="registrationpage.form.login.is.taken"/></p>
                             </div>
                         </c:if>
                         <div class="form-group" >

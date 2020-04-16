@@ -3,3 +3,4 @@
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
         <%@ page isELIgnored="false" %>
         <fmt:setBundle basename="page"/>
+<%--        <fmt:setLocale value="${sessionScope.get('lang')}" scope="session"/>--%>

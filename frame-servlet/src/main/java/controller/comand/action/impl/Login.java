@@ -10,6 +10,8 @@ import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
+import static controller.constants.PageConstance.*;
+import static controller.constants.DataForPageNamedConstant.*;
 
 public class Login extends MultipleMethodCommand {
 
@@ -25,30 +27,23 @@ public class Login extends MultipleMethodCommand {
 
     @Override
     protected String performGet(HttpServletRequest request) {
-        return "/WEB-INF/login.jsp";
+        return LOGIN_PATH;
     }
 
     @Override
     protected String performPost(HttpServletRequest request) {
 
         LoginInfoDto loginInfoDto = loginInfoDtoRequestDtoMapper.mapToDto(request);
-        if (loginDtoValidator.validate(loginInfoDto)){
+        if (loginDtoValidator.isValid(loginInfoDto)){
             try {
-                System.out.println("pre login");
                 Optional<User> user = userService.loginUser(loginInfoDto);
-                System.out.println("post login");
                 if(user.isPresent()){
-                    request.getSession().setAttribute("user",user.get());
-                    return "/WEB-INF/index.jsp";
+                    request.getSession().setAttribute(USER,user.get());
+                    return REDIRECT_ON_HOME;
                 }
-                request.setAttribute("incorrectLoginOrPassword",true);
-                return "/WEB-INF/login.jsp";
-            } catch (NoSuchUserException e) {
-                request.setAttribute("incorrectLoginOrPassword",true);
-                return "/WEB-INF/login.jsp";
-            }
+            } catch (NoSuchUserException ignored){}
         }
-        request.setAttribute("incorrectLoginOrPassword",true);
-        return "/WEB-INF/login.jsp";
+        request.setAttribute(INCORRECT_LOGIN_OR_PASSWORD,true);
+        return LOGIN_PATH;
     }
 }

@@ -8,6 +8,10 @@ import exeptions.OccupiedLoginException;
 import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
+
+import static controller.constants.PageConstance.*;
+import static controller.constants.DataForPageNamedConstant.*;
 
 public class Registration extends MultipleMethodCommand {
 
@@ -23,28 +27,30 @@ public class Registration extends MultipleMethodCommand {
 
     @Override
     protected String performGet(HttpServletRequest request) {
-        System.out.println("registration get");
-        return "/WEB-INF/registration.jsp";
+        System.out.println("pr"+request.getSession().getAttribute("lang"));
+        Enumeration<String> str=request.getSession().getAttributeNames();
+        System.out.println("start");
+        while (str.hasMoreElements()){
+            System.out.println(str.nextElement());
+        }
+        System.out.println("finish");
+        return REGISTRATION_PATH;
     }
 
     @Override
     protected String performPost(HttpServletRequest request) {
-        System.out.println("registration post");
         RegistrationInfoDto registrationInfoDto = registrationDtoMapper.mapToDto(request);
-        System.out.println("dto.maped" + registrationInfoDto.getUsername() + registrationInfoDto.getPassword());
-        if (!registrationInfoDtoValidator.validate(registrationInfoDto)) {
-            System.out.println("registration data invalid");
-            request.setAttribute("inputHasErrors", true);
-            return "/WEB-INF/registration.jsp";
+        System.out.println("pr"+request.getSession().getAttribute("lang"));
+        if (!registrationInfoDtoValidator.isValid(registrationInfoDto)) {
+            request.setAttribute(INPUT_HAS_ERRORS, true);
+            return REGISTRATION_PATH;
         }
-        System.out.println("after if");
         try {
-            System.out.println("registration try");
             userService.addNewUserToDB(registrationInfoDto);
-            return "redirect:/login";
+            return REDIRECT_ON_LOGIN;
         } catch (OccupiedLoginException e) {
-            request.setAttribute("inputLoginAlreadyTaken", true);
+            request.setAttribute(INPUT_LOGIN_ALREADY_TAKEN, true);
         }
-        return "/WEB-INF/registration.jsp";
+        return REGISTRATION_PATH;
     }
 }
