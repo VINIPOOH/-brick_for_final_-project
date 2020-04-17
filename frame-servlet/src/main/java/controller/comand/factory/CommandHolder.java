@@ -59,8 +59,6 @@ public class CommandHolder {
     }
 
     public static ActionCommand defineCommand(String path) {
-        System.out.println(path);
-        System.out.println(COMMANDS.getOrDefault("", EMPTY_COMMAND));
         return COMMANDS.getOrDefault(path, EMPTY_COMMAND);
     }
 }

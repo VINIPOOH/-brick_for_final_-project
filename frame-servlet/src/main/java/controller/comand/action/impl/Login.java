@@ -10,8 +10,8 @@ import service.UserService;
 import javax.servlet.http.HttpServletRequest;
 
 import static controller.constants.AttributeConstants.SESSION_USER;
-import static controller.constants.DataForPageNamedConstant.INCORRECT_LOGIN_OR_PASSWORD;
-import static controller.constants.DataForPageNamedConstant.INPUT_HAS_ERRORS;
+import static controller.constants.ExceptionInfoForJspConstants.INCORRECT_LOGIN_OR_PASSWORD;
+import static controller.constants.ExceptionInfoForJspConstants.INPUT_HAS_ERRORS;
 import static controller.constants.PageConstance.LOGIN_PATH;
 import static controller.constants.PageConstance.REDIRECT_ON_HOME;
 
