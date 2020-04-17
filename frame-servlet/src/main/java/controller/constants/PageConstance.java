@@ -9,6 +9,5 @@ public interface PageConstance {
     String REGISTRATION_PATH = "/WEB-INF/registration.jsp";
     String LOGIN_PATH = "/WEB-INF/login.jsp";
     String INDEX_PATH = "/WEB-INF/index.jsp";
-
-
+    String ERROR_404 = "/WEB-INF/404.jsp";
 }

@@ -1,10 +1,10 @@
 package controller.comand.action.impl;
 
-import controller.comand.action.DoubleMethodCommand;
+import controller.comand.action.MultipleMethodCommand;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class User extends DoubleMethodCommand {
+public class User extends MultipleMethodCommand {
     @Override
     protected String performGet(HttpServletRequest request) {
         return "WEB-INF/user/u.jsp";

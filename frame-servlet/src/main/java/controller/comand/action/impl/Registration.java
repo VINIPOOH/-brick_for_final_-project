@@ -1,6 +1,6 @@
 package controller.comand.action.impl;
 
-import controller.comand.action.DoubleMethodCommand;
+import controller.comand.action.MultipleMethodCommand;
 import dto.RegistrationInfoDto;
 import dto.maper.RequestDtoMapper;
 import dto.validation.Validator;
@@ -14,7 +14,7 @@ import static controller.constants.DataForPageNamedConstant.INPUT_LOGIN_ALREADY_
 import static controller.constants.PageConstance.REDIRECT_ON_LOGIN;
 import static controller.constants.PageConstance.REGISTRATION_PATH;
 
-public class Registration extends DoubleMethodCommand {
+public class Registration extends MultipleMethodCommand {
 
     private final RequestDtoMapper<RegistrationInfoDto> registrationDtoMapper;
     private final Validator<RegistrationInfoDto> registrationInfoDtoValidator;

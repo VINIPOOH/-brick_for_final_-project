@@ -1,6 +1,6 @@
 package controller.comand.action.impl;
 
-import controller.comand.action.DoubleMethodCommand;
+import controller.comand.action.MultipleMethodCommand;
 import dto.LoginInfoDto;
 import dto.maper.RequestDtoMapper;
 import dto.validation.Validator;
@@ -15,7 +15,7 @@ import static controller.constants.DataForPageNamedConstant.INPUT_HAS_ERRORS;
 import static controller.constants.PageConstance.LOGIN_PATH;
 import static controller.constants.PageConstance.REDIRECT_ON_HOME;
 
-public class Login extends DoubleMethodCommand {
+public class Login extends MultipleMethodCommand {
 
     private final Validator<LoginInfoDto> loginDtoValidator;
     private final RequestDtoMapper<LoginInfoDto> loginInfoDtoRequestDtoMapper;
