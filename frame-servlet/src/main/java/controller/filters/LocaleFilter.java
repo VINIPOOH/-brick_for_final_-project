@@ -3,11 +3,11 @@ package controller.filters;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 import java.util.Locale;
 
 import static controller.constants.AttributeConstants.REQUEST_LANG;
-import javax.servlet.jsp.jstl.core.Config;
 
 
 public class LocaleFilter implements Filter {

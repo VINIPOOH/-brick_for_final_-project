@@ -26,9 +26,7 @@ public class Servlet extends HttpServlet {
             throws ServletException, IOException {
 
         String path = request.getRequestURI().replaceFirst(".*/delivery/", "");
-        System.out.println("path  "+ path);
         String page = new ActionFactory().defineCommand(path).execute(request);
-        System.out.println("page  "+ page);
         if (page.contains("redirect:")) {
             response.sendRedirect(page.replace("redirect:", "/delivery/"));
         } else {

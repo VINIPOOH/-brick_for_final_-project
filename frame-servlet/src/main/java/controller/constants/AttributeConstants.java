@@ -1,4 +1,5 @@
 package controller.constants;
+
 import javax.servlet.jsp.jstl.core.Config;
 
 public interface AttributeConstants {

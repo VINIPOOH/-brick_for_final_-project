@@ -30,8 +30,8 @@ public class UserService {
 
     public Optional<User> loginUser(LoginInfoDto loginInfoDto) throws NoSuchUserException {
         User user = userDao.findByEmail(loginInfoDto.getUsername()).orElseThrow(NoSuchUserException::new);
-        if (user.isAccountNonExpired()&&user.isAccountNonLocked()&&user.isCredentialsNonExpired()
-                &&user.isEnabled()&&user.getPassword().equals(passwordEncoderService.encode(loginInfoDto.getPassword()))){
+        if (user.isAccountNonExpired() && user.isAccountNonLocked() && user.isCredentialsNonExpired()
+                && user.isEnabled() && user.getPassword().equals(passwordEncoderService.encode(loginInfoDto.getPassword()))) {
             return Optional.of(user);
         }
 

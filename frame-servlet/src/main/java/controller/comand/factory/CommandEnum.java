@@ -29,12 +29,12 @@ public enum CommandEnum {
     },
     ADMIN {
         {
-            this.command=new Admin();
+            this.command = new Admin();
         }
     },
     USER {
         {
-            this.command=new User();
+            this.command = new User();
         }
     },
     INDEX {

@@ -8,10 +8,11 @@ import exeptions.OccupiedLoginException;
 import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 
-import static controller.constants.PageConstance.*;
-import static controller.constants.DataForPageNamedConstant.*;
+import static controller.constants.DataForPageNamedConstant.INPUT_HAS_ERRORS;
+import static controller.constants.DataForPageNamedConstant.INPUT_LOGIN_ALREADY_TAKEN;
+import static controller.constants.PageConstance.REDIRECT_ON_LOGIN;
+import static controller.constants.PageConstance.REGISTRATION_PATH;
 
 public class Registration extends MultipleMethodCommand {
 

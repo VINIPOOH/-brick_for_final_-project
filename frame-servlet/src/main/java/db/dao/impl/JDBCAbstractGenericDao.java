@@ -18,12 +18,12 @@ import java.util.ResourceBundle;
 public abstract class JDBCAbstractGenericDao<E> implements GenericDao<E, Long> {
 
     protected final Mapper<E> mapper;
+    protected final ResourceBundle resourceBundleRequests;
     private final String saveQuery;
     private final String findByIdQuery;
     private final String findAllQuery;
     private final String updateQuery;
     private final String deleteQuery;
-    protected final ResourceBundle resourceBundleRequests;
     protected DbConnectionPoolHolder connector;
 
 

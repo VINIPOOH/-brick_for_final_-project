@@ -3,7 +3,8 @@ package controller.comand.action.impl;
 import controller.comand.action.ActionCommand;
 
 import javax.servlet.http.HttpServletRequest;
-import static controller.constants.PageConstance.*;
+
+import static controller.constants.PageConstance.REDIRECT_ON_HOME;
 
 public class EmptyCommand implements ActionCommand {
     @Override

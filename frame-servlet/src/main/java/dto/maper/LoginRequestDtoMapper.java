@@ -1,7 +1,6 @@
 package dto.maper;
 
 import dto.LoginInfoDto;
-import dto.RegistrationInfoDto;
 
 import javax.servlet.http.HttpServletRequest;
 
