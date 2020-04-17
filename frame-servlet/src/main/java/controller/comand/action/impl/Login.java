@@ -4,12 +4,10 @@ import controller.comand.action.MultipleMethodCommand;
 import dto.LoginInfoDto;
 import dto.maper.RequestDtoMapper;
 import dto.validation.Validator;
-import entity.User;
 import exeptions.NoSuchUserException;
 import service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 import static controller.constants.AttributeConstants.SESSION_USER;
 import static controller.constants.DataForPageNamedConstant.INCORRECT_LOGIN_OR_PASSWORD;
@@ -42,6 +40,10 @@ public class Login extends MultipleMethodCommand {
             request.setAttribute(INPUT_HAS_ERRORS, true);
             return LOGIN_PATH;
         }
+        return processingServiceLoginRequest(request, loginInfoDto);
+    }
+
+    private String processingServiceLoginRequest(HttpServletRequest request, LoginInfoDto loginInfoDto) {
         try {
             request.getSession().setAttribute(SESSION_USER, userService.loginUser(loginInfoDto));
             return REDIRECT_ON_HOME;

@@ -9,6 +9,7 @@ import static controller.constants.PageConstance.REDIRECT_ON_HOME;
 public class LogOut implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
+        request.getSession().invalidate();
         return REDIRECT_ON_HOME;
     }
 }
