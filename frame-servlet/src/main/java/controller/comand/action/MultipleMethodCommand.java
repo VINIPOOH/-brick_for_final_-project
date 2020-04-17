@@ -8,12 +8,16 @@ public abstract class MultipleMethodCommand implements ActionCommand {
 
     private final String COMMAND_TYPE_GET = "GET";
     private final String COMMAND_TYPE_POST = "POST";
+
     @Override
     public String execute(HttpServletRequest request) {
-        switch (request.getMethod()){
-            case COMMAND_TYPE_GET: return performGet(request);
-            case COMMAND_TYPE_POST: return performPost(request);
-            default: return ERROR_404;
+        switch (request.getMethod()) {
+            case COMMAND_TYPE_GET:
+                return performGet(request);
+            case COMMAND_TYPE_POST:
+                return performPost(request);
+            default:
+                return ERROR_404;
         }
     }
 

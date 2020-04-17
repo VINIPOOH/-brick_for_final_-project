@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
 import static db.dao.UserDaoConstants.PATH_TO_PROPERTY_FILE;
 import static db.dao.UserDaoConstants.USER_SAVE_QUERY;
 
-public class JDBCDaoFactory implements DaoFactory {
+public class JDBCDaoHolder implements DaoFactory {
     private static DbConnectionPoolHolder dbConnectorPoolHolder = DbConnectorPoolHolderBasicDataSource.getDbConnectionPoolHolder();
     private static UserMapper userMapper = new UserMapper();
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle(PATH_TO_PROPERTY_FILE);

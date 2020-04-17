@@ -8,7 +8,6 @@ import entity.RoleType;
 import entity.User;
 import exeptions.NoSuchUserException;
 import exeptions.OccupiedLoginException;
-import exeptions.UsernameNotFoundException;
 
 import java.sql.SQLException;
 import java.util.List;

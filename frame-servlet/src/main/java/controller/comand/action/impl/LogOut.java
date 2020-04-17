@@ -4,7 +4,6 @@ import controller.comand.action.ActionCommand;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static controller.constants.PageConstance.REDIRECT_ON_HOME;
 import static controller.constants.PageConstance.REDIRECT_ON_LOGIN;
 
 public class LogOut implements ActionCommand {

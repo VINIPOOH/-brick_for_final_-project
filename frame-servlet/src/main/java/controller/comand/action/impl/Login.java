@@ -47,8 +47,7 @@ public class Login extends MultipleMethodCommand {
         try {
             request.getSession().setAttribute(SESSION_USER, userService.loginUser(loginInfoDto));
             return REDIRECT_ON_HOME;
-        }
-        catch (NoSuchUserException ignored) {
+        } catch (NoSuchUserException ignored) {
             request.setAttribute(INCORRECT_LOGIN_OR_PASSWORD, true);
             return LOGIN_PATH;
         }

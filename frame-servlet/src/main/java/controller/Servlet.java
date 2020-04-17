@@ -1,7 +1,6 @@
 package controller;
 
-
-import controller.comand.factory.ActionFactory;
+import controller.comand.factory.CommandHolder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +25,7 @@ public class Servlet extends HttpServlet {
             throws ServletException, IOException {
 
         String path = request.getRequestURI().replaceFirst(".*/delivery/", "");
-        String page = new ActionFactory().defineCommand(path).execute(request);
+        String page = CommandHolder.defineCommand(path).execute(request);
         if (page.contains("redirect:")) {
             response.sendRedirect(page.replace("redirect:", "/delivery/"));
         } else {

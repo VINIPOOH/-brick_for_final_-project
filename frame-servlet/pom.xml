@@ -71,7 +71,7 @@
   </dependencies>
 
   <build>
-    <finalName>cruise-company</finalName>
+    <finalName>delivery</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
