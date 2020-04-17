@@ -1,6 +1,6 @@
 package controller.comand.action.impl;
 
-import controller.comand.action.MultipleMethodCommand;
+import controller.comand.action.DoubleMethodCommand;
 import dto.RegistrationInfoDto;
 import dto.maper.RequestDtoMapper;
 import dto.validation.Validator;
@@ -14,7 +14,7 @@ import static controller.constants.DataForPageNamedConstant.INPUT_LOGIN_ALREADY_
 import static controller.constants.PageConstance.REDIRECT_ON_LOGIN;
 import static controller.constants.PageConstance.REGISTRATION_PATH;
 
-public class Registration extends MultipleMethodCommand {
+public class Registration extends DoubleMethodCommand {
 
     private final RequestDtoMapper<RegistrationInfoDto> registrationDtoMapper;
     private final Validator<RegistrationInfoDto> registrationInfoDtoValidator;
@@ -38,12 +38,16 @@ public class Registration extends MultipleMethodCommand {
             request.setAttribute(INPUT_HAS_ERRORS, true);
             return REGISTRATION_PATH;
         }
+        return processingServiseRegistrationRequest(request, registrationInfoDto);
+    }
+
+    private String processingServiseRegistrationRequest(HttpServletRequest request, RegistrationInfoDto registrationInfoDto) {
         try {
             userService.addNewUserToDB(registrationInfoDto);
             return REDIRECT_ON_LOGIN;
         } catch (OccupiedLoginException e) {
             request.setAttribute(INPUT_LOGIN_ALREADY_TAKEN, true);
+            return REGISTRATION_PATH;
         }
-        return REGISTRATION_PATH;
     }
 }
