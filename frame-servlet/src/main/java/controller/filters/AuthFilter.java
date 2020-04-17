@@ -53,6 +53,7 @@ public class AuthFilter implements Filter {
         }
         if ((!(user.getRoleType().equals(RoleType.ROLE_ADMIN))) && path.contains(ADMIN_REQUEST)) {
             res.sendRedirect(REDIRECT_ON_LOGIN_STRAIGHT);
+            req.getSession().invalidate();
             return;
         }
         filterChain.doFilter(request, response);
