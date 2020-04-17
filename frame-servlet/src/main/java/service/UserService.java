@@ -12,7 +12,6 @@ import exeptions.UsernameNotFoundException;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class UserService {
 
@@ -28,20 +27,12 @@ public class UserService {
         return userDao.findAll();
     }
 
-    public Optional<User> loginUser(LoginInfoDto loginInfoDto) throws NoSuchUserException {
-        User user = userDao.findByEmail(loginInfoDto.getUsername()).orElseThrow(NoSuchUserException::new);
-        if (user.isAccountNonExpired() && user.isAccountNonLocked() && user.isCredentialsNonExpired()
-                && user.isEnabled() && user.getPassword().equals(passwordEncoderService.encode(loginInfoDto.getPassword()))) {
-            return Optional.of(user);
-        }
-
-        return Optional.empty();
+    public User loginUser(LoginInfoDto loginInfoDto) throws NoSuchUserException {
+        return userDao.findByEmailAndPasswordWithPermissions(loginInfoDto.getUsername(),
+                passwordEncoderService.encode(loginInfoDto.getPassword()))
+                .orElseThrow(NoSuchUserException::new);
     }
 
-    public User findByEmail(String email) {
-        return userDao.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("There is no user with login: " + email));
-    }
 
     public void addNewUserToDB(RegistrationInfoDto registrationInfoDto) throws OccupiedLoginException {
         User user = getMapper().mapToEntity(registrationInfoDto);

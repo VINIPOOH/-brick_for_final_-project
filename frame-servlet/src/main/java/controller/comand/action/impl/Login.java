@@ -13,6 +13,7 @@ import java.util.Optional;
 
 import static controller.constants.AttributeConstants.SESSION_USER;
 import static controller.constants.DataForPageNamedConstant.INCORRECT_LOGIN_OR_PASSWORD;
+import static controller.constants.DataForPageNamedConstant.INPUT_HAS_ERRORS;
 import static controller.constants.PageConstance.LOGIN_PATH;
 import static controller.constants.PageConstance.REDIRECT_ON_HOME;
 
@@ -37,17 +38,17 @@ public class Login extends MultipleMethodCommand {
     protected String performPost(HttpServletRequest request) {
 
         LoginInfoDto loginInfoDto = loginInfoDtoRequestDtoMapper.mapToDto(request);
-        if (loginDtoValidator.isValid(loginInfoDto)) {
-            try {
-                Optional<User> user = userService.loginUser(loginInfoDto);
-                if (user.isPresent()) {
-                    request.getSession().setAttribute(SESSION_USER, user.get());
-                    return REDIRECT_ON_HOME;
-                }
-            } catch (NoSuchUserException ignored) {
-            }
+        if (!loginDtoValidator.isValid(loginInfoDto)) {
+            request.setAttribute(INPUT_HAS_ERRORS, true);
+            return LOGIN_PATH;
         }
-        request.setAttribute(INCORRECT_LOGIN_OR_PASSWORD, true);
-        return LOGIN_PATH;
+        try {
+            request.getSession().setAttribute(SESSION_USER, userService.loginUser(loginInfoDto));
+            return REDIRECT_ON_HOME;
+        }
+        catch (NoSuchUserException ignored) {
+            request.setAttribute(INCORRECT_LOGIN_OR_PASSWORD, true);
+            return LOGIN_PATH;
+        }
     }
 }
