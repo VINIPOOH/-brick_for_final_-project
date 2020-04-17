@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<%@ include file="layout/metadata-standart.jsp" %>
+
+<html lang="${param.lang}">
 <head>
-    <div th:include="~{layout/header.html::head_base_data}"></div>
-    <title>404</title>
+    <%@ include file="layout/bootstrap.jsp" %>
+    <title ><fmt:message key="homepage.title"/></title>
 </head>
 <body>
-<div th:include="~{layout/header.html::header}"></div>
-<h1>404</h1>
+<%@ include file="layout/header.jsp" %>
+404
 </body>
-</html>

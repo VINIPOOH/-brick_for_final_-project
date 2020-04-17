@@ -20,10 +20,10 @@
         <div><a class="btn" href="?lang=en" ><fmt:message key="button.en.text"/></a>
         <a class="btn" href="?lang=ru"><fmt:message key="button.ru.text"/></a>
         </div>
-        <c:if test="${isAutorise}">
+        <c:if test="${sessionScope.user != null}">
             <div class="row">
             <div class="col-md-6">
-            <label>${session.user.email}</label>
+            <label>${sessionScope.user.email}</label>
             </div>
             <div class="col-md-6">
             <a class="btn border" href="${pageContext.request.contextPath}/logout" ><fmt:message
@@ -31,7 +31,7 @@
             </div>
             </div>
         </c:if>
-        <c:if test="${!isAutorise}">
+        <c:if test="${sessionScope.user==null}">
             <div class="row">
             <a class="btn btn-success" href="${pageContext.request.contextPath}/login" type="submit" ><fmt:message
                 key="lofinpage.button.login"/></a>

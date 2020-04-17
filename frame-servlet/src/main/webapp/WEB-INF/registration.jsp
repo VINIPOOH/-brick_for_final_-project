@@ -1,12 +1,5 @@
 <%@ include file="layout/metadata-standart.jsp" %>
 
-<%--<c:if test="${not empty lang}">--%>
-<%--    <fmt:setLocale value="${lang}" scope="session"/>--%>
-<%--</c:if>--%>
-<%--<c:if test="${not empty param.lang}">--%>
-<%--    <fmt:setLocale value="${param.lang}" scope="session"/>--%>
-<%--</c:if>--%>
-
 <html lang="${param.lang}">
 <head>
     <%@ include file="layout/bootstrap.jsp" %>
