@@ -10,17 +10,16 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 import static controller.constants.AttributeConstants.SESSION_USER;
+import static controller.constants.PageConstance.ERROR_404;
 import static controller.constants.PageConstance.REDIRECT_ON_LOGIN_STRAIGHT;
 
 
 public class AuthFilter implements Filter {
 
-    //    public static final String DELIVERY_REGEX_PATTERN = ".*/delivery/.*";
-    public static final String INDEX_REQUEST = "/delivery/index";
+    private static final String INDEX_REQUEST = "/delivery/index";
+    private static final String HOME_REQUEST = "/delivery/";
     private static final String LOGIN_REQUEST = "/login";
-    //    private static final String INDEX_REQUEST = "/index";
     private static final String REGISTRATION_REQUEST = "/registration";
-    private static final String LOGOUT_REQUEST = "/logout";
     private static final String ADMIN_REQUEST = "/admin";
 
     @Override
@@ -37,23 +36,26 @@ public class AuthFilter implements Filter {
         HttpSession session = req.getSession();
         String path = req.getRequestURI();
 
-        if (path.endsWith(INDEX_REQUEST)) {
+        if (path.endsWith(INDEX_REQUEST)||path.endsWith(HOME_REQUEST)) {
             filterChain.doFilter(request, response);
             return;
         }
-        boolean isAccessibleForLogged = !(path.contains(LOGIN_REQUEST) || path.contains(REGISTRATION_REQUEST));
+        boolean isOnlyForNotLogin = (path.contains(LOGIN_REQUEST) || path.contains(REGISTRATION_REQUEST));
         User user = (User) session.getAttribute(SESSION_USER);
-        if (user == null) {
-            if (!isAccessibleForLogged) {
+        if (user != null && isOnlyForNotLogin) {
+            request.getRequestDispatcher(ERROR_404).forward(request, response);
+            return;
+        }
+        if(user==null){
+            if(isOnlyForNotLogin){
                 filterChain.doFilter(request, response);
                 return;
             }
-            res.sendRedirect(REDIRECT_ON_LOGIN_STRAIGHT);
+            request.getRequestDispatcher(ERROR_404).forward(request, response);
             return;
         }
         if ((!(user.getRoleType().equals(RoleType.ROLE_ADMIN))) && path.contains(ADMIN_REQUEST)) {
-            res.sendRedirect(REDIRECT_ON_LOGIN_STRAIGHT);
-            req.getSession().invalidate();
+            request.getRequestDispatcher(ERROR_404).forward(request, response);
             return;
         }
         filterChain.doFilter(request, response);
