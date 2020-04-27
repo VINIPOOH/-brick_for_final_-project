@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import static controller.constants.AttributeConstants.SESSION_USER;
 import static controller.constants.ExceptionInfoForJspConstants.INCORRECT_LOGIN_OR_PASSWORD;
 import static controller.constants.ExceptionInfoForJspConstants.INPUT_HAS_ERRORS;
-import static controller.constants.PageConstance.LOGIN_PATH;
-import static controller.constants.PageConstance.REDIRECT_ON_HOME;
+import static controller.constants.PageConstance.*;
 
 public class Login extends MultipleMethodCommand {
 
@@ -46,7 +45,7 @@ public class Login extends MultipleMethodCommand {
     private String processingServiceLoginRequest(HttpServletRequest request, LoginInfoDto loginInfoDto) {
         try {
             request.getSession().setAttribute(SESSION_USER, userService.loginUser(loginInfoDto));
-            return REDIRECT_ON_HOME;
+            return REDIRECT_ON_USER;
         } catch (NoSuchUserException ignored) {
             request.setAttribute(INCORRECT_LOGIN_OR_PASSWORD, true);
             return LOGIN_PATH;

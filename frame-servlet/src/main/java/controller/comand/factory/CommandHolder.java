@@ -4,6 +4,7 @@ import controller.comand.action.ActionCommand;
 import controller.comand.action.impl.*;
 import db.dao.UserDao;
 import db.dao.impl.JDBCDaoHolder;
+import db.dao.impl.LocalityDao;
 import dto.LoginInfoDto;
 import dto.RegistrationInfoDto;
 import dto.maper.LoginRequestDtoMapper;
@@ -12,6 +13,7 @@ import dto.maper.RequestDtoMapper;
 import dto.validation.LoginDtoValidator;
 import dto.validation.RegistrationDtoValidator;
 import dto.validation.Validator;
+import service.LocalityService;
 import service.PasswordEncoderService;
 import service.UserService;
 
@@ -30,9 +32,11 @@ public class CommandHolder {
     private static final RequestDtoMapper<RegistrationInfoDto> REGISTRATION_INFO_DTO_REQUEST_DTO_MAPPER = new RegistrationRequestDtoMapper();
 
     private static final UserDao USER_DAO = JDBCDaoHolder.getUserDao();
+    private static final LocalityDao LOCALITY_DAO=JDBCDaoHolder.getLocalityDao();
 
     private static final PasswordEncoderService PASSWORD_ENCODER_SERVICE = new PasswordEncoderService();
     private static final UserService USER_SERVICE = new UserService(PASSWORD_ENCODER_SERVICE, USER_DAO);
+    private static final LocalityService LOCALITY_SERVICE = new LocalityService(LOCALITY_DAO);
 
     private static final ActionCommand LOGIN = new Login(LOGIN_INFO_DTO_VALIDATOR, LOGIN_INFO_DTO_REQUEST_DTO_MAPPER, USER_SERVICE);
     private static final ActionCommand LOGOUT = new LogOut();
@@ -41,7 +45,9 @@ public class CommandHolder {
     private static final ActionCommand ADMIN = new Admin();
     private static final ActionCommand USER = new User();
     private static final ActionCommand INDEX = new Index();
+    private static final ActionCommand ERROR_404 = new Error404();
     private static final ActionCommand EMPTY_COMMAND = new EmptyCommand();
+    private static final ActionCommand COUNTER = new Counter(LOCALITY_SERVICE);
 
     private static final Map<String, ActionCommand> COMMANDS = new HashMap<>();
 
@@ -53,6 +59,8 @@ public class CommandHolder {
         COMMANDS.put("admin", ADMIN);
         COMMANDS.put("user", USER);
         COMMANDS.put("index", INDEX);
+        COMMANDS.put("404", ERROR_404);
+        COMMANDS.put("counter", COUNTER);
     }
 
     private CommandHolder() {
